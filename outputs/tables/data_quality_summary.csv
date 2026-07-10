@@ -1,0 +1,17 @@
+,value
+rows_available_for_analysis,12988.0
+columns,34.0
+municipalities,342.0
+age_classes,19.0
+sex_categories,2.0
+expected_dimension_combinations,12996.0
+observed_dimension_combinations,12988.0
+missing_dimension_combinations,8.0
+duplicate_dimension_combinations,0.0
+rest_category_rows_excluded,1.0
+rest_category_cost_eur,133179514.59
+rest_category_cost_share_percent,0.2415
+zero_or_negative_insured_year_rows,0.0
+negative_total_cost_rows,0.0
+total_healthcare_cost_eur,55020505632.26
+total_insured_years,17461901.13

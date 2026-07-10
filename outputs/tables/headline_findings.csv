@@ -1,0 +1,9 @@
+finding,municipality_or_value,supporting_value
+Highest SCR across all municipalities,HEERLEN,SCR 1.243
+Lowest SCR across all municipalities,TERSCHELLING,SCR 0.813
+Highest SCR not marked by size heuristic,HEERLEN,SCR 1.243
+Lowest SCR not marked by size heuristic,KOGGENLAND,SCR 0.847
+Largest positive absolute euro gap,ROTTERDAM,"€177,900,892"
+Largest negative absolute euro gap,WESTLAND,"€-31,175,075"
+Share within ±5% of expected,51.2%,
+Share within ±10% of expected,84.5%,
