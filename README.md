@@ -5,7 +5,9 @@ An end-to-end healthcare analytics project that compares actual municipality-lev
 **Author:** Mahdi Dadgar  
 **Data source:** Vektis Open Databestand Zorgverzekeringswet 2023 — municipality level
 
-[GitHub Profile](https://github.com/mahdidadgar-data) | [LinkedIn](https://www.linkedin.com/in/mahdi-dadgar-777240116/)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://vektis-healthcare-benchmark.streamlit.app)
+
+[Live Application](https://vektis-healthcare-benchmark.streamlit.app) | [GitHub Profile](https://github.com/mahdidadgar-data) | [LinkedIn](https://www.linkedin.com/in/mahdi-dadgar-777240116/)
 
 ---
 
@@ -25,6 +27,29 @@ The results are presented through reproducible Jupyter notebooks, analytical tab
 
 ---
 
+## Live interactive application
+
+The project includes a deployed Streamlit application that allows users to explore the benchmark results for all 342 municipalities.
+
+### Open the application
+
+**[Launch the Dutch Healthcare Cost Benchmark app](https://vektis-healthcare-benchmark.streamlit.app)**
+
+The application allows users to:
+
+- select any Dutch municipality
+- view actual and expected healthcare costs
+- inspect the municipality's Standardised Cost Ratio
+- review the percentage difference from expectation
+- examine the euro gap per insured year
+- see the municipality's position in the national SCR distribution
+- explore category-level actual-to-expected ratios
+- inspect positive and negative category-level euro contributions
+- review the complete municipality ranking
+- identify municipalities marked by the population-size caution heuristic
+
+---
+
 ## Why I built this project
 
 My background is in scientific research, applied statistics, and evidence-based analysis. I am now applying that foundation to Data Science and healthcare analytics.
@@ -39,6 +64,7 @@ The project allowed me to practise several areas that are important in real heal
 - distinguishing relative differences from absolute financial impact
 - testing the stability of headline rankings
 - communicating findings without making claims that the available data cannot support
+- presenting analytical outputs through an interactive decision-support application
 
 ---
 
@@ -81,6 +107,15 @@ Instructions for downloading and placing the source file are available in:
 ```text
 data/README.md
 ```
+
+The repository contains only:
+
+- analytical code
+- notebooks
+- derived summary tables
+- visualisations
+- documentation
+- the Streamlit application
 
 ---
 
@@ -208,6 +243,15 @@ The sensitivity check showed:
 
 This suggests that the higher-than-expected end of the ranking is relatively stable under this rule, while the lower-than-expected end is more sensitive to municipality size.
 
+The association between municipality size and absolute SCR deviation was weak:
+
+```text
+Pearson association: -0.088
+Spearman rank association: -0.168
+```
+
+These associations are descriptive and should not be interpreted as statistical evidence.
+
 ---
 
 ## Care-category analysis
@@ -253,13 +297,15 @@ The strongest lower-than-expected signals not marked by the heuristic included:
 
 | Municipality | SCR | Difference from expected |
 |---|---:|---:|
-| Koggenland | 0.847 | −15.3% |
-| Nieuwkoop | 0.856 | −14.4% |
-| Medemblik | 0.866 | −13.4% |
-| Bergen NH | 0.867 | −13.3% |
-| Aalsmeer | 0.870 | −13.0% |
+| Koggenland | 0.847 | -15.3% |
+| Nieuwkoop | 0.856 | -14.4% |
+| Medemblik | 0.866 | -13.4% |
+| Bergen NH | 0.867 | -13.3% |
+| Aalsmeer | 0.870 | -13.0% |
 
-In the highest-SCR spotlight municipalities, medical specialist care was an important absolute contributor to the positive euro gap. The category analysis also demonstrated that the highest relative ratio was not always the category with the largest euro contribution.
+In the highest-SCR spotlight municipalities, medical specialist care was an important absolute contributor to the positive euro gap.
+
+The category analysis also demonstrated that the highest relative ratio was not always the category with the largest euro contribution.
 
 These results are descriptive signals for further investigation. They do not prove inappropriate care, inefficiency, or differences in healthcare quality.
 
@@ -285,26 +331,40 @@ These results are descriptive signals for further investigation. They do not pro
 
 ---
 
-## Interactive Streamlit application
+## Streamlit application
 
-The project includes an interactive application that allows users to:
+The application reads the derived analytical tables produced by the notebook workflow. It does not recalculate the benchmark when a user selects a municipality.
 
-- select any of the 342 municipalities
-- view actual and expected healthcare costs
-- inspect the municipality SCR and euro gap
-- see whether the municipality is marked by the population-size heuristic
-- compare its position with the national SCR distribution
-- explore care-category ratios
-- inspect positive and negative category-level euro contributions
-- review the complete municipality ranking
+This separation keeps the application:
 
-Run the application locally from the project root:
+- fast
+- transparent
+- reproducible
+- independent of the excluded raw data file
+
+### Public application
+
+**https://vektis-healthcare-benchmark.streamlit.app**
+
+### Run the application locally
+
+From the project root:
 
 ```bash
 streamlit run app/streamlit_app.py
 ```
 
-A public application link will be added after deployment.
+The app uses:
+
+```text
+outputs/tables/municipality_benchmark.csv
+```
+
+and:
+
+```text
+outputs/tables/category_breakdown_all_municipalities.csv
+```
 
 ---
 
@@ -330,6 +390,11 @@ dutch-healthcare-cost-benchmark-vektis-2023/
 │
 ├── outputs/
 │   ├── figures/
+│   │   ├── 01_top_bottom_scr.png
+│   │   ├── 02_scr_distribution.png
+│   │   ├── 03_scr_vs_population_size.png
+│   │   └── 04_category_breakdown_outliers.png
+│   │
 │   └── tables/
 │
 ├── reports/
@@ -354,12 +419,13 @@ This notebook:
 
 - loads the Vektis source data
 - inspects columns and data types
-- identifies cost variables
+- identifies healthcare cost variables
 - creates analytical variables
 - checks municipality–age–sex completeness
 - documents the Vektis rest category
 - validates the final analytical dataset
-- saves the processed local Parquet file and quality-control tables
+- saves the processed local Parquet file
+- saves reproducible quality-control tables
 
 ### Notebook 02 — Age–sex-adjusted benchmarking
 
@@ -394,6 +460,29 @@ This notebook:
 - compares category ratios across six spotlight municipalities
 - distinguishes relative and absolute category drivers
 - prepares interview-ready analytical findings
+
+---
+
+## Analytical output tables
+
+The project includes derived analytical tables such as:
+
+- `municipality_benchmark.csv`
+- `category_breakdown_all_municipalities.csv`
+- `category_breakdown_outliers.csv`
+- `national_age_sex_reference_rates.csv`
+- `benchmark_sensitivity_summary.csv`
+- `category_mapping.csv`
+- `data_quality_summary.csv`
+- `missing_dimension_combinations.csv`
+- `rest_category_summary.csv`
+- `distribution_summary.csv`
+- `headline_findings.csv`
+- `size_association_summary.csv`
+- `spotlight_category_drivers.csv`
+- `visualization_headline_table.csv`
+
+These tables improve transparency and allow the application and reports to use the same validated analytical outputs.
 
 ---
 
@@ -462,6 +551,7 @@ streamlit run app/streamlit_app.py
 - indirect age–sex standardisation
 - descriptive sensitivity analysis
 - healthcare cost benchmarking
+- interactive data visualisation
 
 ---
 
@@ -514,8 +604,33 @@ This project strengthened my understanding of several important healthcare-data 
 - data-quality limitations should be visible rather than hidden
 - relative ratios and absolute financial impact should be reported together
 - ranking stability should be tested before presenting headline conclusions
-- aggregated data supports investigation, but not individual-level or causal conclusions
-- technical results become more useful when they are translated into clear decision-support language
+- aggregated data supports investigation but not individual-level or causal conclusions
+- technical results become more useful when translated into clear decision-support language
+- analytical findings can be made more accessible through an interactive application
+
+---
+
+## Possible future extensions
+
+Potential next steps include:
+
+1. combining multiple years of Vektis data
+2. evaluating whether municipality patterns persist over time
+3. incorporating socioeconomic and deprivation indicators
+4. adding urbanisation and healthcare-supply variables
+5. incorporating morbidity or chronic-disease indicators
+6. calculating formal uncertainty intervals or funnel plots
+7. performing spatial analysis across neighbouring municipalities
+8. connecting cost patterns with clinical outcome or quality indicators
+9. developing provider-level analyses where appropriate data is legally and ethically available
+
+---
+
+## Full findings report
+
+A detailed interpretation of the methodology, findings, sensitivity analysis, and limitations is available here:
+
+**[Read the full findings report](reports/findings_report.md)**
 
 ---
 
@@ -523,7 +638,8 @@ This project strengthened my understanding of several important healthcare-data 
 
 **Mahdi Dadgar**
 
-PhD-trained analytical professional transitioning into Data Science, Machine Learning, Business Intelligence, and Responsible AI.
+PhD-trained analytical professional transitioning into Data Science, Machine Learning, Business Intelligence, healthcare analytics, and Responsible AI.
 
+- Live application: https://vektis-healthcare-benchmark.streamlit.app
 - GitHub: https://github.com/mahdidadgar-data
 - LinkedIn: https://www.linkedin.com/in/mahdi-dadgar-777240116/
