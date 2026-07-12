@@ -633,9 +633,9 @@ A detailed interpretation of the methodology, findings, sensitivity analysis, an
 
 ---
 
-## Author
+## Author and use
 
-**Mahdi Dadgar**
+This portfolio project was developed by Mahdi Dadgar for educational and professional demonstration purposes. Reuse or redistribution of the project materials requires prior permission from the author.
 
 PhD-trained analytical professional transitioning into Data Science, Machine Learning, Business Intelligence, healthcare analytics, and Responsible AI.
 
