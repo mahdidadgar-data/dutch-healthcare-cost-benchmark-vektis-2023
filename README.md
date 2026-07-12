@@ -459,7 +459,6 @@ This notebook:
 - examines the relationship between SCR deviation and municipality size
 - compares category ratios across six spotlight municipalities
 - distinguishes relative and absolute category drivers
-- prepares interview-ready analytical findings
 
 ---
 
