@@ -449,7 +449,7 @@ A stronger extension of the project could include:
 
 ---
 
-## 13. Interview-ready explanation
+## 13. Project summary
 
 A concise explanation of the project is:
 
